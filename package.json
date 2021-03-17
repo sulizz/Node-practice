@@ -2,21 +2,20 @@
   "name": "node",
   "version": "1.0.0",
   "description": "",
-  "main": "calc.js",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sulizz/nodePractice.git"
+    "url": "git+https://github.com/sulizz/Node-practice.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sulizz/nodePractice/issues"
+    "url": "https://github.com/sulizz/Node-practice/issues"
   },
-  "homepage": "https://github.com/sulizz/nodePractice#readme",
-  "dependencies": {
-    "yargs": "^16.2.0"
-  }
+  "homepage": "https://github.com/sulizz/Node-practice#readme"
 }
