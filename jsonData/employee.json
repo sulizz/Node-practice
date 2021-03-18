@@ -1,0 +1,47 @@
+{ 
+    "employees":[ 
+        { "id":1, 
+            "name":"Gauri", 
+            "designation":"Trainer", 
+            "address":{ 
+                "city":"abc", 
+                "country":"India", 
+                "zipcode":456789 
+            }, 
+            "projectId":"TCS_Corp_01" 
+        }, 
+        { 
+            "id": 2, 
+            "name":"Rudy", 
+            "designation":"Software engg", 
+            "address":{ 
+                "city":"abc", 
+                "country":"USA", 
+                "zipcode":1234 
+            }, 
+            "projectId":"TCS_P1" 
+        }, 
+        { 
+            "id":3, 
+            "name":"Tanvirul", 
+            "designation":"Sr. Software Eng", 
+            "address":{ 
+                "city":"xyz", 
+                "country":"USA", 
+                "zipcode":2345 
+            }, 
+        "projectId":"TCS_Corp_01" 
+        }, 
+        { 
+            "id":4, 
+            "name":"Divya", 
+            "designation":"Manager", 
+            "address":{ 
+                "city":"pqr", 
+                "country":"India", 
+                "zipcode":2345 
+            }, 
+            "projectId":"TCS_P1" 
+        } 
+    ] 
+}

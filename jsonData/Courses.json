@@ -1,0 +1,34 @@
+{
+    "courses":[
+        {
+            "name": "AWS ARchitect",
+            "category": "Cloud Computing",
+            "price":21000
+        },
+        {
+            "name": "Angular",
+            "category": "Front End",
+            "price":10000
+        },
+        {
+            "name": "React",
+            "category": "Front End",
+            "price":15000
+        },
+        {
+            "name": "Express",
+            "category": "BackEnd",
+            "price":21000
+        },
+        {
+            "name": "Java",
+            "category": "BackEnd",
+            "price":15000
+        },
+        {
+            "name": "Ruby on rails",
+            "category": "BackEnd",
+            "price":19000
+        }
+    ]
+}
