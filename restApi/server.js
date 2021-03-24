@@ -14,6 +14,10 @@ MongoClient.connect(
         //select db from mongoDb
         let db = client.db("demo");
 
+        //check if the collection exits or not
+         let collections = db.listCollections().toArray();
+         collections.then(data => console.log(data.map(o => o.name === 'customers')));
+
         //CREATECOLLECTION in the selected db
         // createCustomerCollection(db);
 
@@ -24,7 +28,12 @@ MongoClient.connect(
         // findCustomer(db);
 
         //UPDATE customer 
-        
+        // updateCustomer(db);
+
+        //delete customer
+        // deleteCustomer(db);
+
+
         // app.listen(port,()=>{
         //     console.log('express server is up plus could connect to mongoserver')
         // })
@@ -32,6 +41,7 @@ MongoClient.connect(
 );
 
 function createCustomerCollection(db) {
+
     db.createCollection("customers", (err, res) => {
         if (err) throw err;
 
@@ -58,4 +68,23 @@ function findCustomer(db) {
 
         console.log(res);
     })
+}
+
+function updateCustomer(db) {
+    let query = { address: "123 ave" };
+    let newVal = {$set:{address : 'USA'}}
+    db.collection("customers").findOneAndUpdate(query, newVal, (err,res) => {
+        if (err) throw err;
+        console.log('customer address updated');
+    });
+}
+
+function deleteCustomer(db) {
+    let query = {address: "USA"}
+    db.collection('customers').deleteOne(query, (err, res) => {
+        if (err) throw err; 
+
+        console.log(res);
+    });
+
 }
