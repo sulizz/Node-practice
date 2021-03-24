@@ -1,13 +1,46 @@
-import express from 'express';
-import http from 'http';
-import path from 'path';
-import socketIO from 'socket.io'
+import express from "express";
+import http from "http";
+import path from "path";
+import socketIO from "socket.io";
+import { LocalStorage } from "node-localstorage";
+import iplocate from "node-iplocate";
+import publicIP from "public-ip";
 
 const app = express();
-app.use(express.static(path.join(__dirname,'public')))
+app.set("port", process.env.PORT || 3500);
+app.use(express.static(path.join(__dirname, "public")));
+let localstorage = new LocalStorage("./Scratch");
 
+//http server created using express app
+let server = http.createServer(app).listen(app.get("port"), () => {
+    console.log("express app is up on ", app.get("port"));
+});
 
-app.set('port',process.env.PORT || 3500)
-http.createServer(app).listen(app.get('port'),() => {
-    console.log(`express is up on ${app.get('port')}` )
-})
+let io = socketIO(server);
+
+io.sockets.on("connection", (socket) => {
+    //consuming my events with labels
+    socket.on("nick", (nick) => {
+        socket.nickname = nick;
+    });
+
+    socket.on("chat", (data) => {
+        publicIP.v4().then((ip) => {
+            iplocate(ip).then((results) => {
+                let city = JSON.stringify(results.city, null, 2);
+                localstorage.setItem("userLocal", city);
+            });
+        });
+
+        let nickname = socket.nickname ? socket.nickname : "";
+
+        let payload = {
+            message: data.message,
+            nick: nickname,
+            location: localstorage.getItem("userLocal"),
+        };
+
+        socket.emit("chat", payload);
+        socket.broadcast.emit("chat", payload);
+    });
+});

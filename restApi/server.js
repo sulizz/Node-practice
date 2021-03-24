@@ -14,15 +14,17 @@ MongoClient.connect(
         //select db from mongoDb
         let db = client.db("demo");
 
-        //--> createCollection in the selected db
+        //CREATECOLLECTION in the selected db
         // createCustomerCollection(db);
 
         //INSERT customer into db
         // insertCustomer(db);
 
-        //FIND
+        //FIND customer 
         // findCustomer(db);
 
+        //UPDATE customer 
+        
         // app.listen(port,()=>{
         //     console.log('express server is up plus could connect to mongoserver')
         // })
