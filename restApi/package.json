@@ -1,5 +1,5 @@
 {
-    "name": "restApi",
+    "name": "restapi",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
@@ -10,6 +10,7 @@
     "license": "ISC",
     "dependencies": {
         "express": "^4.17.1",
-        "mongodb": "^3.6.5"
+        "mongodb": "^3.6.5",
+        "mongoose": "^5.12.2"
     }
 }

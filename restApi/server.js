@@ -1,9 +1,15 @@
 const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
+const CustomerRoutes = require('./customerRouter')
+
+const mongoose = require("mongoose");
+const customer = require('./customerModel')
 
 var app = express();
 var port = 3300;
 var mongourl = "mongodb://127.0.0.1;27017/";
+
+app.use('/api',CustomerRoutes)
 
 MongoClient.connect(
     mongourl,
@@ -15,8 +21,8 @@ MongoClient.connect(
         let db = client.db("demo");
 
         //check if the collection exits or not
-         let collections = db.listCollections().toArray();
-         collections.then(data => console.log(data.map(o => o.name === 'customers')));
+        //  let collections = db.listCollections().toArray();
+        //  collections.then(data => console.log(data.map(o => o.name === 'customers')));
 
         //CREATECOLLECTION in the selected db
         // createCustomerCollection(db);
@@ -34,9 +40,9 @@ MongoClient.connect(
         // deleteCustomer(db);
 
 
-        // app.listen(port,()=>{
-        //     console.log('express server is up plus could connect to mongoserver')
-        // })
+        app.listen(port,()=>{
+            console.log('express server is up plus could connect to mongoserver')
+        })
     }
 );
 
