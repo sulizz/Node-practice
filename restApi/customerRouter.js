@@ -1,5 +1,13 @@
 const express = require('express');
+const customerModel = require('./customerModel');
 const router = express.Router();
+const cors = require('cors');
+
+var corsOptions = {
+    origin:'*',
+    optionsSucessStatus:200
+}
+
 
 //interceptor
 router.use((req,res,next) => {
@@ -10,11 +18,20 @@ router.use((req,res,next) => {
 //all routes defined here. 
 
 router.get('/customer',(req, res) => {
-    res.send('hi');
+   customerModel.find((err,data) => {
+       if (err) {
+           throw err
+       } else {
+           res.json(data);
+       }
+   })
 })
 
-router.post('/customer',(req, res) => {
-    res.send('hi-post');
+router.post('/customer',cors(corsOptions),(req, res) => {
+    customerModel.create(req.body, (err,data) => {
+        if (err) throw err;
+        res.send('data inserted');
+    })
 })
 router.put('/customer',(req, res) => {
     res.send('hi-put');

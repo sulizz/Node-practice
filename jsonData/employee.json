@@ -42,6 +42,16 @@
                 "zipcode":2345 
             }, 
             "projectId":"TCS_P1" 
-        } 
+        },
+        {
+            "id": 5,
+            "name": "bibek",
+            "adress": {
+                "street": "123 ave",
+                "city": "euless",
+                "state": "texas"
+            },
+            "favoriteMovies": ["dragon", "cat", "dog"]
+        }
     ] 
 }
