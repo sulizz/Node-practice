@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <%- include('./partials/header')%>
+        <script>
+            function show(){
+                window.location.href = "http://localhost:3000/api/user";
+            }
+        </script>
+    </head>
+    <body>
+        <%- include('./partials/body')%>
+        <button onClick = "show()">Admin Dashboard</button>
+    </body>
+</html>

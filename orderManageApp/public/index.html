@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OrderManagementAndStatusApp</title>
+        <!-- Latest compiled and minified CSS -->
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        />
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    </head>
+
+    <body>
+
+        <form action ="/api/user" method ='POST'>
+
+                <input type = 'text' name= 'name' placeholder="Enter name">
+                <input type='email' name='email' placeholder="Enter email">
+                <input type = 'text' name = 'address.street' placeholder="Enter street">
+                <input type = 'text' name = 'address.city' placeholder="Enter city">
+                <input type = 'text' name = 'address.state' placeholder="Enter state">
+                <input type = 'text' name = 'address.zipcode' placeholder="Enter zipcode">
+            
+            <button type="submit">Submit</button>
+        </form>
+            
+
+    </body>
+
+</html>
