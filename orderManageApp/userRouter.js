@@ -29,7 +29,7 @@ router.get("/user", (req, res) => {
 router.post("/user", cors(corsOptions), (req, res) => {
     userModel.create(req.body, (err, data) => {
         if (err) throw err;
-        res.redirect("/");
+        res.render("sucess");
     });
 });
 
