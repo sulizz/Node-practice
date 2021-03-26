@@ -19,9 +19,23 @@ let server = http.createServer(app).listen(app.get("port"), () => {
 let io = socketIO(server);
 
 io.sockets.on("connection", (socket) => {
+
+    let list = socket.client.conn.server.clients
+    let users = Object.keys(list);
+    // {
+    //     'id1':{
+
+    //     },
+    //     ':id2':{
+
+    //     }
+    // }
+
     //consuming my events with labels
     socket.on("nick", (nick) => {
         socket.nickname = nick;
+        socket.emit('userList',users);
+       
     });
 
     socket.on("chat", (data) => {
@@ -32,15 +46,19 @@ io.sockets.on("connection", (socket) => {
             });
         });
 
-        let nickname = socket.nickname ? socket.nickname : "";
+        let nickname = socket.nickname;
 
-        let payload = {
-            message: data.message,
-            nick: nickname,
-            location: localstorage.getItem("userLocal"),
-        };
+        if (nickname) {
+            let payload = {
+                message: data.message,
+                nick: nickname,
+                location: localstorage.getItem("userLocal"),
+                time :  new Date().toLocaleTimeString()
+            };
 
-        socket.emit("chat", payload);
-        socket.broadcast.emit("chat", payload);
+            socket.emit("chat", payload);
+            socket.broadcast.emit("chat", payload);
+        }
+
     });
 });

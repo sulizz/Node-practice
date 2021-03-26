@@ -1,0 +1,49 @@
+<div>
+    <h2>Bug Tracker</h2>
+    <a href="/addUser">
+        <button onclick="">Add Bug</button>
+    </a>
+</div>
+
+<table id="usersGrid">
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Asignee</th>
+        <th>Status</th>
+        <th>No of Days Left</th>
+        <th>Actions</th>
+    </tr>
+    <tbody>
+        <% userData = JSON.parse(data) %> <% for (var i=0; i< userData.length;
+        i++) { %>
+        <tr>
+            <% today = new Date().getDate() %> <% bugCreationDate = new
+            Date(userData[i].createdAt).getDate() %> <% no_of_days =
+            parseInt((today-bugCreationDate)/(1000 * 60 *60 *24)) %>
+            <td><%= title = userData[i].title %></td>
+            <td><%= userData[i].description %></td>
+            <td><%= userData[i].assignee %></td>
+            <td><%= userData[i].status %></td>
+            <td id="days"><%=no_of_days %></td>
+            <td>
+                <a
+                    title="Resolve"
+                    href="api/resolveBug/<%= userData[i].title%>"
+                >
+                    <button type="button">Resolve Bug</button>
+                </a>
+            </td>
+        </tr>
+
+        <%}%>
+    </tbody>
+</table>
+<script>
+    var days = document.getElementById("days").innerHTML;
+    days = parseInt(days);
+    window.days;
+    if (days > 3) {
+        document.getElementById("days").style.background = "red";
+    }
+</script>
