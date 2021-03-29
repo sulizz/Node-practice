@@ -1,3 +1,4 @@
+//for es6 transpiled by babel
 {
     "presets": [
         "@babel/preset-env"
