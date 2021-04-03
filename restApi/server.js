@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const CustomerRoutes = require('./customerRouter')
 const customer = require('./customerModel')
+const SportsRoutes = require('./sportsRouter')
 
 
 //define mongoUrl
@@ -29,6 +30,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/demo", {
 
 
 app.use('/api',CustomerRoutes)
+app.use('/sports', SportsRoutes)
 
 app.listen(3400, ()=>{
     console.log('server started at 3400');

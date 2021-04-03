@@ -1,21 +1,23 @@
 <html>
     <head></head>
+
     <body>
-        <h1>ONLINE CHAT</h1>
-        <p>
-            <input id="nickText" type="text" />
-            <button id="nick">Set Nickname</button>
-        </p>
-        <textarea style="height: 300px; width: 500px"></textarea>
+        <div>
+            <h1>ONLINE CHAT</h1>
+            <p>
+                <input id="nickText" type="text" />
+                <button id="nick">Set Nickname</button>
+            </p>
+            <textarea style="height: 300px; width: 500px"></textarea>
 
-        <h2>ActiveUsers: <b id= "usersNo" ></b></h2>
-        <p id= "activeUsers"></p>
+            <h2>ActiveUsers: <b id="usersNo"></b></h2>
+            <p id="activeUsers"></p>
 
-
-        <p>
-            <input id="chatText" type="text" />
-            <button id="chat">Send Chat Message</button>
-        </p>
+            <p>
+                <input id="chatText" type="text" />
+                <button id="chat">Send Chat Message</button>
+            </p>
+        </div>
     </body>
     <script src="/socket.io/socket.io.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -23,16 +25,23 @@
         var socket = io.connect();
 
         socket.on("chat", (data) => {
-            var msg = data.nick + "(" + data.location + ") " + data.time + " : "+ data.message;
+            var msg =
+                data.nick +
+                "(" +
+                data.location +
+                ") " +
+                data.time +
+                " : " +
+                data.message;
             $("textarea").val($("textarea").val() + msg + "\n");
         });
-        
-        socket.on('userList',(users)=>{
-            users.map(item => {
-                $('#activeUsers').append(`userId: <strong> ${item} </strong>`)
-            })
-            document.getElementById('usersNo').innerHTML= users.length
-        })
+
+        socket.on("userList", (users) => {
+            users.map((item) => {
+                $("#activeUsers").append(`userId: <strong> ${item} </strong>`);
+            });
+            document.getElementById("usersNo").innerHTML = users.length;
+        });
 
         $(function () {
             $("#nick").on("click", function () {
@@ -45,6 +54,6 @@
         });
 
         var dt = new Date();
-        document.getElementById("datetime").innerHTML = dt.toLocaleString();    
+        document.getElementById("datetime").innerHTML = dt.toLocaleString();
     </script>
 </html>

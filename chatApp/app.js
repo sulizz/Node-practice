@@ -19,8 +19,7 @@ let server = http.createServer(app).listen(app.get("port"), () => {
 let io = socketIO(server);
 
 io.sockets.on("connection", (socket) => {
-
-    let list = socket.client.conn.server.clients
+    let list = socket.client.conn.server.clients;
     let users = Object.keys(list);
     // {
     //     'id1':{
@@ -34,8 +33,7 @@ io.sockets.on("connection", (socket) => {
     //consuming my events with labels
     socket.on("nick", (nick) => {
         socket.nickname = nick;
-        socket.emit('userList',users);
-       
+        socket.emit("userList", users);
     });
 
     socket.on("chat", (data) => {
@@ -53,12 +51,11 @@ io.sockets.on("connection", (socket) => {
                 message: data.message,
                 nick: nickname,
                 location: localstorage.getItem("userLocal"),
-                time :  new Date().toLocaleTimeString()
+                time: new Date().toLocaleTimeString(),
             };
 
             socket.emit("chat", payload);
             socket.broadcast.emit("chat", payload);
         }
-
     });
 });

@@ -22,7 +22,7 @@ router.get('/customer',(req, res) => {
        if (err) {
            throw err
        } else {
-           res.json(data);
+           res.send(data);
        }
    })
 })
