@@ -1,18 +1,27 @@
 import express from "express";
 import mongoose from "mongoose";
-import { Router, json, request, urlencoded } from "express";
+const cors = require("cors");
+const { LocalStorage } = require("node-localstorage");
+
 import authRoutes from "./routes/authRoutes";
 import productRoute from "./routes/productRoutes";
-
 
 //constants declared
 const app = express();
 const port = 3000;
-const router =  Router();
 
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use("/api", productRoute);
 
+const session = require("express-session");
+app.use(
+    session({
+        secret: "edurekaSecret",
+        resave: false,
+        saveUninitialized: true,
+    })
+);
 
 
 //mongoose connection
@@ -26,11 +35,27 @@ connection.once("open", () => {
     console.log("MongoDB connected!!!!");
 });
 
-/* Get home page*/
-app.get("/", (req,res,next) => {
-    res.send('Home')
-})
+app.set("view engine", "ejs");
+app.set("views", "./views");
 
+app.use("/auth", authRoutes);
+app.use("/api", productRoute);
+
+/* Get home page*/
+
+app.get("/", (req, res) => {
+    res.render('homepage')
+});
+
+let sess;
+app.get('/register', (req,res) => {
+    sess=req.session;
+    sess.email=" "
+   
+    res.render('register',
+      { invalid: req.query.invalid?req.query.invalid:'',
+         msg: req.query.msg?req.query.msg:''})    
+})
 
 //start express app
 app.listen(port, () => {
