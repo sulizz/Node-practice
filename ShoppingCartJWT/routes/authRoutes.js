@@ -73,99 +73,10 @@ router.post('/login', (req, res) => {
     });
 });
 
-router.get("/newsForm", (req, res) => {
-    const token = localStorage.getItem("authtoken");
-    console.log("token>>>", token);
-    if (!token) {
-        res.redirect("/");
-    }
-    jwt.verify(token, config.secret, (err, decoded) => {
-        if (err) {
-            res.redirect("/");
-        }
-        User.findById(decoded.id, { password: 0 }, (err, user) => {
-            if (err) {
-                res.redirect("/");
-            }
-            if (!user) {
-                res.redirect("/");
-            }
-            console.log("/newsForm : user ==> ", user);
-            res.render("news_form", {
-                user,
-                msg: req.query.msg ? req.query.msg : "",
-            });
-        });
-    });
-});
-
-router.get("/getNews", (req, res) => {
-    const token = localStorage.getItem("authtoken");
-    console.log("token>>>", token);
-    if (!token) {
-        res.redirect("/");
-    }
-    jwt.verify(token, config.secret, (err, decoded) => {
-        if (err) {
-            res.redirect("/");
-        }
-        User.findById(decoded.id, { password: 0 }, (err, user) => {
-            if (err) {
-                res.redirect("/");
-            }
-            if (!user) {
-                res.redirect("/");
-            }
-            console.log("/newsForm : user ==> ", user);
-
-            Newslist.find({}, (err, data) => {
-                if (err) res.status(500).send(err);
-                else {
-                    res.render("news_table", {
-                        user,
-                        data,
-                    });
-                }
-            });
-        });
-    });
-});
-
-router.post("/addToCart", (req, res) => {
-    console.log("/addNews : req.body : ", req.body);
-    const token = localStorage.getItem("authtoken");
-    console.log("token>>>", token);
-    if (!token) {
-        res.redirect("/");
-    }
-    jwt.verify(token, config.secret, (err, decoded) => {
-        if (err) {
-            res.redirect("/");
-        }
-        User.findById(decoded.id, { password: 0 }, (err, user) => {
-            if (err) {
-                res.redirect("/");
-            }
-            if (!user) {
-                res.redirect("/");
-            }
-            console.log("/newsForm : user ==> ", user);
-
-            const d = Date.now();
-            const news = { ...req.body, insertTime: d };
-            console.log("/addNews : news => ", news);
-
-            Newslist.create(news, (err, data) => {
-                if (err)
-                    return res
-                        .status(500)
-                        .send("There was a problem registering user");
-                console.log(`Inserted ... ${data} `);
-                const htmlMsg = encodeURIComponent("Added News DONE !");
-                res.redirect("/admin/newsForm/?msg=" + htmlMsg);
-            });
-        });
-    });
+//logout user
+router.get("/logout", (req, res) => {
+    localStorage.removeItem("authtoken");
+    res.redirect("/");
 });
 
 module.exports = router

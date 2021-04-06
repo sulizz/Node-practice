@@ -11,6 +11,7 @@
     <!-- Bootstrap Start -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
     <!-- Bootstrap End -->
 
     <!-- DataTables Start -->
@@ -21,7 +22,20 @@
 </head>
 
 <body>
-
+    <!-- Nav bar Start-->
+        <nav class="navbar navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="/api/productForm">Shopping Cart</a>
+                <div>
+                    <a class="navbar-brand" href="/api/addProductForm">Add Item</a>
+                </div>
+                <div>
+                    <a class="navbar-brand" href="/auth/logout">Logout</a>
+                </div>
+            </div>
+        </nav>
+        <br /><br /><br /><br />
+        <!-- Nav bar End-->
     <h1>Product List</h1>
     <div class="alert alert-info" role="alert">
         <span>User Name : <%= user.name %>, </span>

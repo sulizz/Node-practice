@@ -1,0 +1,142 @@
+<html ang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <title>Update 24X7 Admin</title>
+        <!-- jQuery needs to be placed before bootstrap -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- Bootstrap Start -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        />
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!-- Bootstrap End -->
+    </head>
+    <body>
+        <div class="container">
+            <!-- Nav bar Start-->
+            <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+                <a class="navbar-brand" href="#">Shopping Cart</a>
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapsibleNavbar"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav">
+                        <!--
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Sing In</a>
+        </li>
+        -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/api/product"
+                                >Edit Product</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/auth/logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <br /><br />
+            <!-- Nav bar End-->
+            <div class="alert alert-info" role="alert">
+                <span>User Name : <%= user.name %>, </span>
+                <span>Email : <%= user.email %> </span>
+            </div>
+            <div class="row">
+                <!-- col-12 -->
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <center>
+                                <h5></h5>
+                                <h5>Add Product</h5>
+                            </center>
+                            <div class="panel panel-info">
+                                <div class="panel-body">
+                                    <form action="/api/addProduct" method="POST">
+                                        <div class="form-group">
+                                            <label for="title">Product Name</label>
+                                            <input
+                                                type="text"
+                                                id="product"
+                                                name="product"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description"
+                                                >Description</label
+                                            >
+                                            <input
+                                                type="text"
+                                                id="description"
+                                                name="description"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="url">Price</label>
+                                            <input
+                                                type="text"
+                                                id="price"
+                                                name="price"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <hr />
+                                        <center>
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary"
+                                            >
+                                                Add
+                                            </button>
+                                            <button
+                                                type="reset"
+                                                class="btn btn-dark"
+                                            >
+                                                RESET
+                                            </button>
+                                        </center>
+                                        <hr />
+                                        <div
+                                            class="alert alert-info"
+                                            role="alert"
+                                            id="msg1"
+                                        >
+                                            <%=msg%>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- col-12 -->
+            </div>
+        </div>
+        <script>
+            // class selector
+            const message = $(".alert.alert-info");
+            if (message.length)
+                setTimeout(() => {
+                    message.fadeOut("slow");
+                }, 100000);
+        </script>
+    </body>
+</html>

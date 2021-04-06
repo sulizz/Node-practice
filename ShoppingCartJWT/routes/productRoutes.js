@@ -16,7 +16,7 @@ var corsOptions = {
     optionSucessStatus: 200,
 };
 
-//get news
+//get product
 router.get('/product',(req,res,next) =>{
     const token = localStorage.getItem("authtoken");
     console.log("token>>>", token);
@@ -45,6 +45,65 @@ router.get('/product',(req,res,next) =>{
         });
     })
 })
+
+//add product
+router.get("/addProductForm", (req, res) => {
+    const token = localStorage.getItem("authtoken");
+    console.log("token>>>", token);
+    if (!token) {
+        res.redirect("/");
+    }
+    jwt.verify(token, config.secret, (err, decoded) => {
+        if (err) {
+            res.redirect("/");
+        }
+        User.findById(decoded.id, { password: 0 }, (err, user) => {
+            if (err) {
+                res.redirect("/");
+            }
+            if (!user) {
+                res.redirect("/");
+            }
+            console.log("/newsForm : user ==> ", user);
+            res.render("addProduct", {
+                user,
+                msg: req.query.msg ? req.query.msg : "",
+            });
+        });
+    });
+});
+
+router.post("/addProduct", (req, res) => {
+    const token = localStorage.getItem("authtoken");
+    console.log("token>>>", token);
+    if (!token) {
+        res.redirect("/");
+    }
+    jwt.verify(token, config.secret, (err, decoded) => {
+        if (err) {
+            res.redirect("/");
+        }
+        User.findById(decoded.id, { password: 0 }, (err, user) => {
+            if (err) {
+                res.redirect("/");
+            }
+            if (!user) {
+                res.redirect("/");
+            }
+
+            console.log('............req body', req.body)
+            product.create(req.body, (err, data) => {
+                if (err)
+                    return res
+                        .status(500)
+                        .send("There was a problem registering product");
+                console.log(`Inserted ... ${data} `);
+                const htmlMsg = encodeURIComponent("Added Product DONE !");
+                res.redirect("/api/product/?msg=" + htmlMsg);
+            });
+        });
+    });
+});
 
 //find a product 
 router.post("/find_by_id", (req, res) => {
